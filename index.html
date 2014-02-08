@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>{FM.js(Engine);} Boilerplate</title>
+    
+    <!--
+    	{FM.js(Engine);} for development
+    -->
+    <script type="text/javascript" src="lib/fm/fmjsengine-concat.js"></script>
+    <!-- {FM.js(Engine);} for release -->
+    <!--<script type="text/javascript" src="lib/fm/fmjsengine-min.js"></script>-->
+    <!--
+    	Your project's entry point.
+    -->
+    <script>
+        //Include your project's files
+        FM.includeJsFile("src/MenuState.js");
+        FM.includeJsFile("src/PlayState.js");
+        FM.includeJsFile("src/Entity.js");
+
+        /* 
+         * Launched when the page is loaded
+         *  - Add and load files
+         *  - Run the game
+         *  - And launch the first state of the game
+         */
+        var start = function () {
+            "use strict";
+            //Easier access to {FM.js(Engine);} classes
+            var assetManager = FM.AssetManager,
+                param = FM.Parameters;
+            /*
+             * Debug mode for development
+             * Display info with the "home/start" key
+             */
+            param.debug = true;
+
+            //Add audio assets in multiple formats if you want cross browser support
+            /*if (!assetManager.addAsset("music", param.AUDIO, "assets/music/music.wav")) {
+                assetManager.addAsset("music", param.AUDIO, "assets/music/music.mp3");
+            }
+            if (!assetManager.addAsset("sfx", param.AUDIO, "assets/sfx/sfx.wav")) {
+                assetManager.addAsset("sfx", param.AUDIO, "assets/sfx/sfx.mp3");
+            }*/
+
+            //Add image assets
+            //assetManager.addAsset("entity", param.IMAGE, "assets/gfx/entity.png");
+
+            //Add the tmx world file
+            //assetManager.addAsset("world", param.FILE, "world/world.tmx");
+
+            //Load all assets
+            assetManager.loadAssets();
+
+            /*
+             * Start game and specify the id of the canvas, the name of the game, 
+             * its resolution, and the first state to start
+             */
+            FM.Game.run("canvas", "YourProjectName", 800, 600, new MenuState());
+        };
+        //Launch the start function when the page is loaded
+        window.addEventListener("load", start, false);
+    </script>
+</head>
+
+<body style="background-color: black;">
+
+<canvas id="canvas" style="display: block;margin: auto; outline: none;" tabindex='1'>
+    <p>
+    	This application requires a browser that supports the HTML5 Canvas element.
+    </p>
+</canvas>
+
+</body>
+</html>
