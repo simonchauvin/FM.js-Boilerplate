@@ -7,13 +7,12 @@ var MenuState = function () {
     //Call parent constructor
     FM.State.call(this);
     /*
-     * The title of the game.
+     * Declare your variables here.
+     * DO NOT INSTANTIATE OBJECTS HERE (the current state is still the previous
+     * one (Preloader))
      */
-    this.title = new FM.GameObject(10);
-    /**
-     * Instructions
-     */
-    this.instructions = new FM.GameObject(10);
+    this.title;
+    this.instructions;
 };
 //MenuState inherits from FM.State
 MenuState.prototype = Object.create(FM.State.prototype);
@@ -27,8 +26,11 @@ MenuState.prototype.init = function () {
     //Call parent method
     FM.State.prototype.init.call(this);
 
-    //Init instructions
+    // Init instructions
+    // Instantiate your objects here
+
     //Add a spatial component to the title to specify a position
+    this.title = new FM.GameObject(10);
     this.title.addComponent(new FM.SpatialComponent(150, 150, this.title));
     //Add a text renderer component to the title to display a text
     this.title.addComponent(new FM.TextRendererComponent("Your Project Name", this.title));
@@ -37,6 +39,7 @@ MenuState.prototype.init = function () {
     //Add the title to the MenuState to have the engine display and update it
     this.add(this.title);
     //Add a spatial component to the title to specify a position
+    this.instructions = new FM.GameObject(10);
     this.instructions.addComponent(new FM.SpatialComponent(270, 450, this.instructions));
     //Add a text renderer component to the title to display a text
     this.instructions.addComponent(new FM.TextRendererComponent("Press SPACE to start", this.instructions));
@@ -58,15 +61,4 @@ MenuState.prototype.update = function (dt) {
     if (FM.Game.isKeyPressed(FM.Keyboard.SPACE)) {
         FM.Game.switchState(new PlayState());
     }
-};
-/**
- * 
- */
-MenuState.prototype.destroy = function () {
-    "use strict";
-    //Call parent method
-    FM.State.prototype.destroy.call(this);
-
-    //Remove the references
-    this.title = null;
 };

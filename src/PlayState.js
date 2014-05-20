@@ -7,9 +7,11 @@ var PlayState = function () {
     //Call parent constructor
     FM.State.call(this);
     /*
-     * An entity of the game.
+     * Declare your variables here.
+     * DO NOT INSTANTIATE OBJECTS HERE (the current state is still the previous
+     * one (MenuState))
      */
-    this.entity = new Entity();
+    this.entity;
 };
 //PlayState inherits from FM.State
 PlayState.prototype = Object.create(FM.State.prototype);
@@ -23,8 +25,11 @@ PlayState.prototype.init = function () {
     //Call parent method
     FM.State.prototype.init.call(this);
 
-    //Init instructions
+    // Init instructions
+    // Instantiate your objects here.
+
     //Add an entity to the state
+    this.entity = new Entity();
     this.add(this.entity);
 };
 /**
@@ -38,15 +43,4 @@ PlayState.prototype.update = function (dt) {
     FM.State.prototype.update.call(this, dt);
 
     //Update instructions
-};
-/**
- * 
- */
-PlayState.prototype.destroy = function () {
-    "use strict";
-    //Call parent method
-    FM.State.prototype.destroy.call(this);
-
-    //Remove the references
-    this.entity = null;
 };

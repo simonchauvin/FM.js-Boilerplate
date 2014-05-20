@@ -22,13 +22,3 @@ Entity.prototype.update = function (dt) {
     "use strict";
     //Update instructions
 };
-/**
- * 
- */
-Entity.prototype.destroy = function () {
-    "use strict";
-    //Call parent method
-    FM.GameObject.prototype.destroy.call(this);
-
-    //Remove the references
-};
